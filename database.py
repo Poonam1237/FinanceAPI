@@ -1,8 +1,7 @@
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import declarative_base,sessionmaker
 
-db_url="mysql+pymysql://root:PoonaM123@localhost:3306/finance_records"
-
+db_url="mysql+pymysql://sql12822443:EXrVcvTKXM@sql12.freesqldatabase.com:3306/sql12822443"
 engine=create_engine(url=db_url,echo=True)
 
 SessionLocal=sessionmaker(bind=engine,autoflush=False,autocommit=False)
