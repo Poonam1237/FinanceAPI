@@ -10,8 +10,8 @@ router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
 @router.get("/summary")
 def dashboard_summary(db:Session=Depends(getdb)):
 
-    total_income = db.query(func.sum(Records.amount)).filter(Records.type == "income").scalar()
-    total_expense = db.query(func.sum(Records.amount)).filter(Records.type == "expense").scalar()
+    total_income = db.query(func.sum(Records.amt)).filter(Records.type == "income").scalar()
+    total_expense = db.query(func.sum(Records.amt)).filter(Records.type == "expense").scalar()
 
     income = total_income or 0
     expense = total_expense or 0
@@ -25,7 +25,7 @@ def dashboard_summary(db:Session=Depends(getdb)):
 @router.get("/monthly-trends")
 def monthly_trends(db: Session = Depends(getdb)):
 
-    data = db.query(func.month(Records.date).label("month"),func.sum(Records.amount).label("total_amount")).group_by(func.month(Records.date)).all()
+    data = db.query(func.month(Records.date).label("month"),func.sum(Records.amt).label("total_amount")).group_by(func.month(Records.date)).all()
 
     result = []
 
