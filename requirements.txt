@@ -7,3 +7,5 @@ jwt
 python-multipart
 pydantic
 email-validator
+jose
+datetime
