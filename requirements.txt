@@ -9,3 +9,5 @@ pydantic
 email-validator
 python-jose
 datetime
+python-jose[cryptography]
+passlib
