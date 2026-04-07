@@ -1,18 +1,14 @@
-from auth.my_http_bearer import myhttpbearer
-from fastapi import HTTPException,Depends
-from models.usermodel import User
+from datetime import datetime,timedelta
+from jose import jwt
 
-bearer=myhttpbearer()
-def admin_required(current_user:User=Depends(bearer)):
+SECRET_KEY = "secret"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-    if (current_user.role).lower()!="admin":
-        raise HTTPException(status_code=403,detail="Admin privileges required")
-    return current_user
+def create_token(data:dict):
+    to_encode=data.copy()
+    expires=datetime.utcnow()+timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp":expires})
+    return jwt.encode(to_encode,SECRET_KEY,algorithm=ALGORITHM)
 
-def analyst_required(current_user:User=Depends(bearer)):
-    if (current_user.role).lower() not in ["admin", "analyst"]:
-        raise HTTPException(status_code=403, detail="Analyst privileges required") 
-    return current_user
-
-def viewer_required(current_user:User=Depends(bearer)):
-       return current_user
+    
