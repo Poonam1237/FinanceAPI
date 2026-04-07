@@ -1,4 +1,4 @@
-from sqlalchemy.engine import create_engine
+from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base,sessionmaker
 
 db_url="mysql+pymysql://sql12822443:EXrVcvTKXM@sql12.freesqldatabase.com:3306/sql12822443"
